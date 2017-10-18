@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using App.Entity;
 
 namespace App.Models
 {
@@ -29,5 +30,13 @@ namespace App.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Cliente> Clientes { get; set; }
+
+        public DbSet<Reserva> Reservas { get; set; }
+
+        public DbSet<Habitacion> Habitaciones { get; set; }
+
+        public DbSet<Hospedaje> Hospedajes { get; set; }
     }
 }
