@@ -30,8 +30,17 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
+    <div class="container body-content" style="padding-top: 20px">
+
+        <div class="row">
+            <div class="col-sm-2">
+                @Html.Partial("_SideNav")
+            </div>
+            <div class="col-sm-10">
+                @RenderBody()
+            </div>
+        </div>
+
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
@@ -40,6 +49,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/underscore")
     @RenderSection("scripts", required: false)
 </body>
 </html>
