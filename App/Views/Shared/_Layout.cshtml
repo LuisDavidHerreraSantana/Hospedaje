@@ -10,6 +10,11 @@
 
     @RenderSection("styles", required: false)
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/underscore")
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -49,10 +54,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jquery-ui")
-    @Scripts.Render("~/bundles/underscore")
     @RenderSection("scripts", required: false)
 </body>
 </html>

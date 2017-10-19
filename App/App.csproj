@@ -186,6 +186,7 @@
     <Compile Include="Entity\Habitacion.cs" />
     <Compile Include="Entity\Hospedaje.cs" />
     <Compile Include="Entity\Reserva.cs" />
+    <Compile Include="Entity\TipoHabitacion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,6 +205,10 @@
     <Compile Include="Migrations\201710180850289_column-name-hospedaje.cs" />
     <Compile Include="Migrations\201710180850289_column-name-hospedaje.Designer.cs">
       <DependentUpon>201710180850289_column-name-hospedaje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710190050071_add-tipo-habitacion.cs" />
+    <Compile Include="Migrations\201710190050071_add-tipo-habitacion.Designer.cs">
+      <DependentUpon>201710190050071_add-tipo-habitacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -320,15 +325,13 @@
     <Content Include="Views\Cliente\Details.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
-    <Content Include="Views\Reserva\Create.cshtml" />
-    <Content Include="Views\Reserva\Delete.cshtml" />
-    <Content Include="Views\Reserva\Details.cshtml" />
-    <Content Include="Views\Reserva\Edit.cshtml" />
-    <Content Include="Views\Reserva\Index.cshtml" />
     <Content Include="Views\Reserva\Reserva.cshtml" />
+    <Content Include="Views\Shared\_Modal_habitaciones.cshtml" />
+    <Content Include="Views\Reserva\Online.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -349,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710180850289_column-name-hospedaje.resx">
       <DependentUpon>201710180850289_column-name-hospedaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710190050071_add-tipo-habitacion.resx">
+      <DependentUpon>201710190050071_add-tipo-habitacion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

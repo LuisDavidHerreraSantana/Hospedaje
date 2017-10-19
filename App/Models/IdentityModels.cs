@@ -38,5 +38,7 @@ namespace App.Models
         public DbSet<Habitacion> Habitaciones { get; set; }
 
         public DbSet<Hospedaje> Hospedajes { get; set; }
+
+        public DbSet<TipoHabitacion> TiposHabitacion { get; set; }
     }
 }
