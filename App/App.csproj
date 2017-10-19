@@ -178,8 +178,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Entity\Cliente.cs" />
     <Compile Include="Entity\Habitacion.cs" />
     <Compile Include="Entity\Hospedaje.cs" />
@@ -194,6 +196,14 @@
     <Compile Include="Migrations\201710180716339_add-reserva-user.cs" />
     <Compile Include="Migrations\201710180716339_add-reserva-user.Designer.cs">
       <DependentUpon>201710180716339_add-reserva-user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710180809220_add-validation-cliente.cs" />
+    <Compile Include="Migrations\201710180809220_add-validation-cliente.Designer.cs">
+      <DependentUpon>201710180809220_add-validation-cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710180850289_column-name-hospedaje.cs" />
+    <Compile Include="Migrations\201710180850289_column-name-hospedaje.Designer.cs">
+      <DependentUpon>201710180850289_column-name-hospedaje.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -305,6 +315,17 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\underscore.min.map" />
     <Content Include="Views\Shared\_SideNav.cshtml" />
+    <Content Include="Views\Cliente\Create.cshtml" />
+    <Content Include="Views\Cliente\Delete.cshtml" />
+    <Content Include="Views\Cliente\Details.cshtml" />
+    <Content Include="Views\Cliente\Edit.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Reserva\Create.cshtml" />
+    <Content Include="Views\Reserva\Delete.cshtml" />
+    <Content Include="Views\Reserva\Details.cshtml" />
+    <Content Include="Views\Reserva\Edit.cshtml" />
+    <Content Include="Views\Reserva\Index.cshtml" />
+    <Content Include="Views\Reserva\Reserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -322,6 +343,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710180716339_add-reserva-user.resx">
       <DependentUpon>201710180716339_add-reserva-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710180809220_add-validation-cliente.resx">
+      <DependentUpon>201710180809220_add-validation-cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710180850289_column-name-hospedaje.resx">
+      <DependentUpon>201710180850289_column-name-hospedaje.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

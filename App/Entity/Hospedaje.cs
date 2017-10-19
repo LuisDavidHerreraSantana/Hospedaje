@@ -13,6 +13,8 @@ namespace App.Entity
         [Key]
         public int IdHospedaje { set; get; }
 
+        public string Nombre { get; set; }
+
         public virtual ICollection<Habitacion> Habitaciones { get; set; }
     }
 }

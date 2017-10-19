@@ -14,10 +14,16 @@ namespace App.Entity
         [Key]
         public string Dni { set; get; }
 
+        [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El nombre es requerido")]
         public string Nombre { get; set; }
 
+        [Display(Name = "Apellido Paterno")]
+        [Required(ErrorMessage = "El apellido paterno es requerido")]
         public string ApellidoPaterno { get; set; }
 
+        [Display(Name = "Apellido Materno")]
+        [Required(ErrorMessage = "El apellido materno es requerido")]
         public string ApellidoMaterno { get; set; }
 
         public virtual ICollection<Reserva> Reservas { get; set; }

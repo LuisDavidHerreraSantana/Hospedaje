@@ -13,6 +13,7 @@ namespace App.Entity
         [Key]
         public int IdReserva { set; get; }
 
+        [Required(ErrorMessage = "El dni es requerido")]
         public string Dni { set; get; }
 
         public virtual Cliente Cliente { get; set; }
