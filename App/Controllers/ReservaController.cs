@@ -107,7 +107,7 @@ namespace App.Controllers
                     Reserva.Estado = ReservaEstado.ANULADO.Value;
                     db.Entry(Reserva).State = EntityState.Modified;
                     db.SaveChanges();
-                    Session["Reserva.Anular"] = "La reserva N° "+ Reserva.IdReserva + " se ha anulado correctamente.";
+                    Session["Reserva.Anular"] = "La reserva N." + Reserva.IdReserva + " se ha anulado correctamente.";
                 }
                 catch (Exception e) {
                     Session["Reserva.Anular"] = "Ocurrio un error al anular la reserva, por favor intentelo denuevo.";
@@ -149,7 +149,7 @@ namespace App.Controllers
 
             var res = db.Reservas.ToList().LastOrDefault();
 
-            ViewBag.Message = "La reserva se guardó correctamente, con el N°" + res.IdReserva;
+            ViewBag.Message = "La reserva se registro correctamente, con el N." + res.IdReserva;
             ModelState.Clear();
         }
 

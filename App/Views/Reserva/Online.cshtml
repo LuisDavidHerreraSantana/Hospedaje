@@ -7,7 +7,13 @@
 
     if (ViewBag.Message != null)
     {
-        <div class="alert alert-success text-center">@ViewBag.Message</div>
+        <script>
+           swal({
+               title: "Felicidades",
+               text: "@ViewBag.Message",
+               icon: "success"
+           });
+        </script>
     }
 
     <div class="form-horizontal">

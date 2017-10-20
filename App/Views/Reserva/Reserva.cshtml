@@ -3,11 +3,17 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
 
-    if(ViewBag.Message != null)
+
+    if (ViewBag.Message != null)
     {
-        <div class="alert alert-success text-center">@ViewBag.Message</div>
+        <script>
+           swal({
+               title: "Reserva Registrada",
+               text: "@ViewBag.Message",
+               icon: "success"
+           });
+        </script>
     }
 
     <div class="form-horizontal">

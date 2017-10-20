@@ -6,7 +6,13 @@
 
 @if (Session["Reserva.Anular"] != null)
 {
-    @Session["Reserva.Anular"]
+   <script>
+       swal({
+           title: "",
+           text: "@Session["Reserva.Anular"]",
+           icon: "success"
+       });
+   </script>
 
     Session["Reserva.Anular"] = null;
 }
