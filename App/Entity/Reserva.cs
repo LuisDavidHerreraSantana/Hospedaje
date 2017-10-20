@@ -24,5 +24,7 @@ namespace App.Entity
 
         public DateTime Fecha { get; set; }
 
+        public string Estado { get; set; }
+
     }
 }

@@ -1,0 +1,17 @@
+﻿@model App.Entity.Reserva
+
+
+@using (Html.BeginForm("Anular", "Reserva", FormMethod.Get))
+{
+    <div class="form-inline">
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail3">Email address</label>
+            <input type="text" class="form-control" name="criterio" id="exampleInputEmail3" placeholder="Ingresar DNI">
+        </div>
+        <button type="submit" class="btn btn-default">Verificar Reserva</button>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

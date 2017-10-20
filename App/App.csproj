@@ -186,6 +186,7 @@
     <Compile Include="Entity\Habitacion.cs" />
     <Compile Include="Entity\Hospedaje.cs" />
     <Compile Include="Entity\Reserva.cs" />
+    <Compile Include="Entity\ReservaEstado.cs" />
     <Compile Include="Entity\TipoHabitacion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -209,6 +210,10 @@
     <Compile Include="Migrations\201710190050071_add-tipo-habitacion.cs" />
     <Compile Include="Migrations\201710190050071_add-tipo-habitacion.Designer.cs">
       <DependentUpon>201710190050071_add-tipo-habitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710200232201_add_estado_reserva.cs" />
+    <Compile Include="Migrations\201710200232201_add_estado_reserva.Designer.cs">
+      <DependentUpon>201710200232201_add_estado_reserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -328,6 +333,8 @@
     <Content Include="Views\Reserva\Reserva.cshtml" />
     <Content Include="Views\Shared\_Modal_habitaciones.cshtml" />
     <Content Include="Views\Reserva\Online.cshtml" />
+    <Content Include="Views\Reserva\Anular.cshtml" />
+    <Content Include="Views\Shared\_Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,6 +362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710190050071_add-tipo-habitacion.resx">
       <DependentUpon>201710190050071_add-tipo-habitacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710200232201_add_estado_reserva.resx">
+      <DependentUpon>201710200232201_add_estado_reserva.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

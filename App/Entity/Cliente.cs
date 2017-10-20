@@ -1,4 +1,5 @@
 ﻿using App.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,10 +27,13 @@ namespace App.Entity
         [Required(ErrorMessage = "El apellido materno es requerido")]
         public string ApellidoMaterno { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Reserva> Reservas { get; set; }
 
         [ForeignKey("User")]
         public string IdUsuario { get; set; }
+
+        [JsonIgnore]
         public virtual ApplicationUser User { get; set; }
 
     }

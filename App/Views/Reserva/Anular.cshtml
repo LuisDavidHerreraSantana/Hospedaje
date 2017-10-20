@@ -1,0 +1,71 @@
+﻿@model IEnumerable<App.Entity.Reserva>
+
+@Html.Action("Search")
+
+
+
+@if (Session["Reserva.Anular"] != null)
+{
+    @Session["Reserva.Anular"]
+
+    Session["Reserva.Anular"] = null;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Dni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.ApellidoPaterno)
+        </th>
+        <th>
+           Fecha de Reserva
+        </th>
+        <th>
+            Hora de Ingreso
+        </th>
+        <th>
+            Tipo de Habitacion
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Habitacion.Numero)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.Dni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.ApellidoPaterno)
+        </td>
+        <td>
+            @item.Fecha.ToString("yyyy-MM-dd")
+        </td>
+        <td>
+            @item.Fecha.ToString("HH:ss")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Habitacion.TipoHabitacion.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Habitacion.Numero)
+        </td>
+        <td>
+            @Html.ActionLink("Anular", "Apply", new { id = item.IdReserva }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
+
+

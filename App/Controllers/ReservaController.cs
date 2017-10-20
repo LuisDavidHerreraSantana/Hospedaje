@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using App.Entity;
 using App.Models;
+using Newtonsoft.Json;
 
 namespace App.Controllers
 {
@@ -30,8 +31,18 @@ namespace App.Controllers
             return PartialView("_Modal_habitaciones", model);
         }
 
+        [ChildActionOnly]
+        public ActionResult Search()
+        {
+            Reserva Reserva = new Reserva();
+
+            return PartialView("_Search", Reserva);
+        }
+
         public ActionResult Reserva()
         {
+            ViewBag.JsonClientes = JsonConvert.SerializeObject(db.Clientes.ToList(), Formatting.Indented);
+
             return View();
         }
 
@@ -42,6 +53,8 @@ namespace App.Controllers
             {
                 this.ReservarHabitacion(reserva);
             }
+
+            ViewBag.JsonClientes = JsonConvert.SerializeObject(db.Clientes.ToList(), Formatting.Indented);
 
             return View();
         }
@@ -62,6 +75,48 @@ namespace App.Controllers
             return View();
         }
 
+        public ActionResult Anular(string criterio = "")
+        {
+
+            var Reservas = db.Reservas
+                .Where(x => 
+                x.Dni.Contains(criterio) || 
+                x.Cliente.Nombre.Contains(criterio) || 
+                x.Cliente.ApellidoPaterno.Contains(criterio) ||
+                x.Cliente.ApellidoMaterno.Contains(criterio)
+                ).Where(x => x.Estado == ReservaEstado.RESERVADO.Value).ToList();
+
+            return View(Reservas);
+        }
+
+        public ActionResult Apply(string id)
+        {
+            if (id != null)
+            {
+                try
+                {
+                    int idReserva = int.Parse(id);
+                    var Reserva = db.Reservas.Find(idReserva);
+
+                    if (Reserva == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    Reserva.Habitacion.Disponible = true;
+                    Reserva.Estado = ReservaEstado.ANULADO.Value;
+                    db.Entry(Reserva).State = EntityState.Modified;
+                    db.SaveChanges();
+                    Session["Reserva.Anular"] = "La reserva N° "+ Reserva.IdReserva + " se ha anulado correctamente.";
+                }
+                catch (Exception e) {
+                    Session["Reserva.Anular"] = "Ocurrio un error al anular la reserva, por favor intentelo denuevo.";
+                }
+
+            }
+
+            return RedirectToAction("Anular");
+        }
 
         protected void ReservarHabitacion(Reserva reserva)
         {
@@ -72,7 +127,7 @@ namespace App.Controllers
                 Cliente.Dni = reserva.Dni;
                 Cliente.Nombre = reserva.Cliente.Nombre;
                 Cliente.ApellidoMaterno = reserva.Cliente.ApellidoMaterno;
-                Cliente.ApellidoPaterno = reserva.Cliente.ApellidoMaterno;
+                Cliente.ApellidoPaterno = reserva.Cliente.ApellidoPaterno;
 
                 db.Clientes.Add(Cliente);
                 db.SaveChanges();
@@ -82,6 +137,7 @@ namespace App.Controllers
             Reserva.Fecha = DateTime.Now;
             Reserva.IdHabitacion = reserva.IdHabitacion;
             Reserva.Dni = reserva.Dni;
+            Reserva.Estado = ReservaEstado.RESERVADO.Value;
             db.Reservas.Add(Reserva);
             db.SaveChanges();
 

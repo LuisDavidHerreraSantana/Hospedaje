@@ -75,3 +75,59 @@
 @Html.Action("Habitaciones", "Reserva")
 
 <button class="btn btn-success" onclick="$('#modal-habitaciones').modal('show');">Disponibilidad</button>
+
+@section Scripts {
+    <script>
+
+        var CLIENTES = @Html.Raw(ViewBag.JsonClientes);
+
+        $(function(){
+        
+            $( "#Dni" ).autocomplete({
+                minLength: 0,
+                source:  function(request, response) {
+
+                    response($.map(CLIENTES, function(item) {
+                        if (item.Dni.includes(request.term) || 
+                            item.Nombre.toLowerCase().includes(request.term.toLowerCase()) || 
+                            item.ApellidoPaterno.toLowerCase().includes(request.term.toLowerCase())) {
+                            return {
+                                Dni: item.Dni,
+                                Nombre: item.Nombre,
+                                ApellidoPaterno: item.ApellidoPaterno,
+                                ApellidoMaterno: item.ApellidoMaterno
+                            };
+                        }
+                        return ;
+                        
+                    }));
+
+                },
+                focus: function( event, ui ) {
+                    console.log(ui);
+                    $( "#Dni" ).val( ui.item.Dni );
+                    return false;
+                },
+                select: function( event, ui ) {
+                    $( "#Dni" ).val( ui.item.Dni );
+                    $( "#Cliente_Nombre" ).val( ui.item.Nombre );
+                    $( "#Cliente_ApellidoPaterno" ).val( ui.item.ApellidoPaterno );
+                    $( "#Cliente_ApellidoMaterno" ).val( ui.item.ApellidoMaterno );
+ 
+                    return false;
+                },
+                messages: {
+                    noResults: '',
+                    results: function() {}
+                }
+            })
+            .autocomplete( "instance" )._renderItem = function( ul, item ) {
+                return $( "<li>" )
+                  .append( "<div><strong>DNI: </strong>" + item.Dni + " <strong>Nombre: </strong>" + item.Nombre + " " + item.ApellidoPaterno + "</div>" )
+                  .appendTo( ul );
+            };
+
+        });
+       
+    </script>
+}
