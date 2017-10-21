@@ -1,5 +1,11 @@
 ﻿@model App.Entity.Reserva
 
+<div style="text-align:center; margin-bottom:30px; margin-top: -25px;">
+    <h1>
+        <span class="label label-default" style="background-color:black;">Reservar Habitacion</span>
+    </h1>
+</div>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -36,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Cliente.ApellidoPaterno, "ApellidoPaterno", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Cliente.ApellidoPaterno, "Apellido Paterno", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Cliente.ApellidoPaterno, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Cliente.ApellidoPaterno, "", new { @class = "text-danger" })
@@ -44,7 +50,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Cliente.ApellidoMaterno, "ApellidoMaterno", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Cliente.ApellidoMaterno, "Apellido Materno", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Cliente.ApellidoMaterno, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Cliente.ApellidoMaterno, "", new { @class = "text-danger" })
@@ -52,10 +58,19 @@
         </div>
         @Html.Hidden("IdHabitacion")
         <div class="form-group">
-            @Html.LabelFor(model => model.Habitacion.Numero, "Numero", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Habitacion.Numero, "N° Habitacion", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Habitacion.Numero, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                <div class="input-group">
+                    @Html.EditorFor(model => model.Habitacion.Numero, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    <span class="input-group-btn" style="width: 27.5%;">
+                        <button type="button" class="btn btn-success" onclick="$('#modal-habitaciones').modal('show');">
+                            Verificar
+                        </button>
+                    </span>
+
+                </div>
                 @Html.ValidationMessageFor(model => model.Habitacion.Numero, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -68,16 +83,17 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Realizar Reserva" class="btn btn-default" />
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"> </span> Realizar Reserva
+                </button>
+                <a href="/" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-remove"> </span> Cancelar
+                </a>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @Html.Action("Habitaciones", "Reserva")
 
-<button class="btn btn-success" onclick="$('#modal-habitaciones').modal('show');">Disponibilidad</button>
