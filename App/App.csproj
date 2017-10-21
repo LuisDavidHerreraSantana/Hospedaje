@@ -336,6 +336,7 @@
     <Content Include="Views\Reserva\Online.cshtml" />
     <Content Include="Views\Reserva\Anular.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Shared\cssView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

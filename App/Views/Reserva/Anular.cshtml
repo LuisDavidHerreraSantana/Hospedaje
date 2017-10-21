@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<App.Entity.Reserva>
 
+<div  style="text-align:center; margin-bottom:20px;">
+    <h1>
+        <span class="label label-default" style="background-color:black;">Anular Reserva</span>
+    </h1>
+</div>
+
 @Html.Action("Search")
 
 
@@ -18,31 +24,33 @@
 }
 
 
+
+
 <div >
 
-    <table class="table table-fixed">
+    <table class="table table-responsive table-fixed">
 
         <thead class="th-bg-black">
             <tr>
-                <th class="col-sm-1">
+                <th style="width: 10%;">
                     @Html.DisplayNameFor(model => model.Dni)
                 </th>
-                <th class="col-sm-3">
+                <th style="width: 25%;">
                     Cliente
                 </th>
-                <th class="col-sm-2">
+                <th style="width: 20%;">
                     Fecha de Reserva
                 </th>
-                <th class="col-sm-2">
+                <th style="width: 15%;">
                     Hora de Ingreso
                 </th>
-                <th class="col-sm-2">
+                <th style="width: 10%;">
                     Habitacion
                 </th>
-                <th class="col-sm-1">
+                <th style="width: 10%;">
                     @Html.DisplayNameFor(model => model.Habitacion.Numero)
                 </th>
-                <th class="col-sm-1" style="height:38px;"> </th>
+                <th style="width: 10%; height:38px;"> </th>
             </tr>
         </thead>
 
@@ -51,25 +59,25 @@
             @foreach (var item in Model)
             {
                 <tr class="row row-table">
-                    <td class="col-sm-1">
+                    <td style="width: 10%;">
                         @Html.DisplayFor(modelItem => item.Cliente.Dni)
                     </td>
-                    <td class="col-sm-3">
+                    <td style="width: 25%;">
                         @item.Cliente.Nombre @item.Cliente.ApellidoPaterno @item.Cliente.ApellidoMaterno
                     </td>
-                    <td class="col-sm-2">
+                    <td style="width: 20%;">
                         @item.Fecha.ToString("yyyy-MM-dd")
                     </td>
-                    <td class="col-sm-2">
+                    <td style="width: 15%;">
                         @item.Fecha.ToString("HH:ss")
                     </td>
-                    <td class="col-sm-2">
+                    <td style="width: 10%;">
                         @Html.DisplayFor(modelItem => item.Habitacion.TipoHabitacion.Descripcion)
                     </td>
-                    <td class="col-sm-1">
+                    <td style="width: 10%;">
                         @Html.DisplayFor(modelItem => item.Habitacion.Numero)
                     </td>
-                    <td class="col-sm-1">
+                    <td style="width: 10%;">
                         @Html.ActionLink("Anular", "Apply", new { id = item.IdReserva }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>

@@ -68,7 +68,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-success" onclick="$('#modal-habitaciones').modal('show');">Disponibilidad</button>
                 <input type="submit" value="Realizar Reserva" class="btn btn-default" />
+                <a href="/" class="btn btn-warning">Cancelar</a>
             </div>
         </div>
     </div>
@@ -78,9 +80,9 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@Html.Action("Habitaciones", "Reserva")
 
-<button class="btn btn-success" onclick="$('#modal-habitaciones').modal('show');">Disponibilidad</button>
+
+
 
 @section Scripts {
     <script>

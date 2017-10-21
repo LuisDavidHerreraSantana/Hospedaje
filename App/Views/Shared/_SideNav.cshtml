@@ -1,8 +1,8 @@
 ﻿
 @if (User.IsInRole("Empleado"))
 {
-    <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="dropdown">
+    <ul class="nav nav-pills nav-stacked nav-side--employee">
+        <li role="presentation" class="dropdown active">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 Reserva <span class="caret"></span>
             </a>
@@ -11,7 +11,7 @@
                 <li><a href="/Reserva/Anular">Anular Reserva</a></li>
             </ul>
         </li>
-        <li role="presentation" class="active"><a href="#">Registro</a></li>
+        <li role="presentation"><a href="#">Registro</a></li>
         <li role="presentation"><a href="#">Comprobante de Pago</a></li>
     </ul>
 }
