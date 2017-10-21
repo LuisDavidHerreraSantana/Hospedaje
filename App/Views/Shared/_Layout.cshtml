@@ -28,6 +28,46 @@
 
         }
 
+       .table-fixed {
+          width: 100%;
+        }
+        .table-fixed tbody {
+          height: 200px;
+          overflow-y: auto;
+          width: 100%;
+          overflow-x: hidden;
+        }
+
+        .table-body--lg {
+            height: 400px !important;
+            background-color: #fefef3;
+        }
+
+        .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+          display: block;
+        }
+        .table-fixed tbody td {
+          float: left;
+        }
+        .table-fixed thead tr th {
+          float: left;
+          
+        }
+        .row-table {
+            margin: 0;
+        }
+
+        .th-bg-black {
+            height: 38px;
+            background: black;
+            color: white;
+        }
+
+        table {
+            border: 1px solid black;
+        }
+
+
     </style>
 
 </head>
@@ -45,8 +85,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Reservar Habitación", "Online", "Reserva")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

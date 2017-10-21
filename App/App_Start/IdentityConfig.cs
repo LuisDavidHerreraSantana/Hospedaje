@@ -53,11 +53,12 @@ namespace App
             // Configure la lógica de validación de contraseñas
             manager.PasswordValidator = new PasswordValidator
             {
+                /*
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = true,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = true,*/
             };
 
             // Configurar valores predeterminados para bloqueo de usuario

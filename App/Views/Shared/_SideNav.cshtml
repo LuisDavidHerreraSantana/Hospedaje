@@ -1,5 +1,18 @@
-﻿<ul class="nav nav-pills nav-stacked">
-    <li role="presentation" class="active"><a href="#">Home</a></li>
-    <li role="presentation"><a href="#">Profile</a></li>
-    <li role="presentation"><a href="#">Messages</a></li>
-</ul>
+﻿
+@if (User.IsInRole("Empleado"))
+{
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Reserva <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/Reserva/Reserva">Registar Reserva</a></li>
+                <li><a href="/Reserva/Anular">Anular Reserva</a></li>
+            </ul>
+        </li>
+        <li role="presentation" class="active"><a href="#">Registro</a></li>
+        <li role="presentation"><a href="#">Comprobante de Pago</a></li>
+    </ul>
+}
+

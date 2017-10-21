@@ -17,61 +17,68 @@
     Session["Reserva.Anular"] = null;
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Dni)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cliente.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cliente.ApellidoPaterno)
-        </th>
-        <th>
-           Fecha de Reserva
-        </th>
-        <th>
-            Hora de Ingreso
-        </th>
-        <th>
-            Tipo de Habitacion
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Habitacion.Numero)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cliente.Dni)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cliente.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cliente.ApellidoPaterno)
-        </td>
-        <td>
-            @item.Fecha.ToString("yyyy-MM-dd")
-        </td>
-        <td>
-            @item.Fecha.ToString("HH:ss")
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Habitacion.TipoHabitacion.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Habitacion.Numero)
-        </td>
-        <td>
-            @Html.ActionLink("Anular", "Apply", new { id = item.IdReserva }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+<div >
 
-</table>
+    <table class="table table-fixed">
+
+        <thead class="th-bg-black">
+            <tr>
+                <th class="col-sm-1">
+                    @Html.DisplayNameFor(model => model.Dni)
+                </th>
+                <th class="col-sm-3">
+                    Cliente
+                </th>
+                <th class="col-sm-2">
+                    Fecha de Reserva
+                </th>
+                <th class="col-sm-2">
+                    Hora de Ingreso
+                </th>
+                <th class="col-sm-2">
+                    Habitacion
+                </th>
+                <th class="col-sm-1">
+                    @Html.DisplayNameFor(model => model.Habitacion.Numero)
+                </th>
+                <th class="col-sm-1" style="height:38px;"> </th>
+            </tr>
+        </thead>
+
+        
+        <tbody class="table-body--lg">
+            @foreach (var item in Model)
+            {
+                <tr class="row row-table">
+                    <td class="col-sm-1">
+                        @Html.DisplayFor(modelItem => item.Cliente.Dni)
+                    </td>
+                    <td class="col-sm-3">
+                        @item.Cliente.Nombre @item.Cliente.ApellidoPaterno @item.Cliente.ApellidoMaterno
+                    </td>
+                    <td class="col-sm-2">
+                        @item.Fecha.ToString("yyyy-MM-dd")
+                    </td>
+                    <td class="col-sm-2">
+                        @item.Fecha.ToString("HH:ss")
+                    </td>
+                    <td class="col-sm-2">
+                        @Html.DisplayFor(modelItem => item.Habitacion.TipoHabitacion.Descripcion)
+                    </td>
+                    <td class="col-sm-1">
+                        @Html.DisplayFor(modelItem => item.Habitacion.Numero)
+                    </td>
+                    <td class="col-sm-1">
+                        @Html.ActionLink("Anular", "Apply", new { id = item.IdReserva }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
+
 
 

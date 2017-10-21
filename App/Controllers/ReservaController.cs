@@ -39,6 +39,7 @@ namespace App.Controllers
             return PartialView("_Search", Reserva);
         }
 
+        [Authorize(Roles = "Empleado")]
         public ActionResult Reserva()
         {
             ViewBag.JsonClientes = JsonConvert.SerializeObject(db.Clientes.ToList(), Formatting.Indented);
@@ -46,6 +47,7 @@ namespace App.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Empleado")]
         [HttpPost]
         public ActionResult Reserva(Reserva reserva)
         {
@@ -59,11 +61,13 @@ namespace App.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Cliente")]
         public ActionResult Online()
         {
             return View();
         }
 
+        [Authorize(Roles = "Cliente")]
         [HttpPost]
         public ActionResult Online(Reserva reserva)
         {
@@ -75,6 +79,7 @@ namespace App.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Empleado")]
         public ActionResult Anular(string criterio = "")
         {
 
@@ -89,6 +94,7 @@ namespace App.Controllers
             return View(Reservas);
         }
 
+        [Authorize(Roles = "Empleado")]
         public ActionResult Apply(string id)
         {
             if (id != null)

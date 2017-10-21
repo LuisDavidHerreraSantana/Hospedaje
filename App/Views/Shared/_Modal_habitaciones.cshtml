@@ -8,55 +8,59 @@
                 <h4 class="modal-title">Modal title</h4>
             </div>
             <div class="modal-body">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TipoHabitacion.Descripcion)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Numero)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Disponible)
-                        </th>
-                        <th>
-                            Seleccionar
-                        </th>
-
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
+                <table class="table table-fixed">
+                    <thead class="th-bg-black">
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TipoHabitacion.Descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Numero)
-                            </td>
-                            <td>
-                                @if (item.Disponible)
-                                {
-                                    <button class="btn btn-success">Disponible</button>
-                                }
-                                else
-                                {
-                                    <button class="btn btn-danger">Ocupado</button>
-                                }
-                            </td>
-                            <td>
-                                @if (item.Disponible)
-                                {
-                                    <input type="radio" value="@item.IdHabitacion" data-hab="@item.Numero" name="hab-seleccionada"  />
-                                }
-                                else
-                                {
-                                    <input type="radio" value="@item.IdHabitacion" data-hab="@item.Numero" name="hab-seleccionada" disabled />
-                                }
-                            </td>
-                            
+                            <th class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.TipoHabitacion.Descripcion)
+                            </th>
+                            <th class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Numero)
+                            </th>
+                            <th class="col-sm-3">
+                                @Html.DisplayNameFor(model => model.Disponible)
+                            </th>
+                            <th class="col-sm-3">
+                                Seleccionar
+                            </th>
+
                         </tr>
-                    }
+                    </thead>
+                    
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="row row-table">
+                                <td class="col-sm-3">
+                                    @Html.DisplayFor(modelItem => item.TipoHabitacion.Descripcion)
+                                </td>
+                                <td class="col-sm-3">
+                                    @Html.DisplayFor(modelItem => item.Numero)
+                                </td>
+                                <td class="col-sm-3">
+                                    @if (item.Disponible)
+                                    {
+                                        <button class="btn btn-success">Disponible</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-danger">Ocupado</button>
+                                    }
+                                </td>
+                                <td class="col-sm-3">
+                                    @if (item.Disponible)
+                                    {
+                                        <input type="radio" value="@item.IdHabitacion" data-hab="@item.Numero" name="hab-seleccionada" />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" value="@item.IdHabitacion" data-hab="@item.Numero" name="hab-seleccionada" disabled />
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
 
                 </table>
             </div>
