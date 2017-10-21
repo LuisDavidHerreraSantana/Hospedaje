@@ -22,7 +22,10 @@ namespace App.Entity
 
         public virtual Habitacion Habitacion { get; set; }
 
+        [Required(ErrorMessage = "Ingrese la fecha de reserva")]
         public DateTime Fecha { get; set; }
+
+        public DateTime createdAt { get; set; }
 
         public string Estado { get; set; }
 

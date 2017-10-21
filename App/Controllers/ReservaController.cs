@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using App.Entity;
 using App.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNet.Identity;
 
 namespace App.Controllers
 {
@@ -111,6 +112,7 @@ namespace App.Controllers
 
                     Reserva.Habitacion.Disponible = true;
                     Reserva.Estado = ReservaEstado.ANULADO.Value;
+                    Reserva.AnulatedAt = DateTime.Now;
                     db.Entry(Reserva).State = EntityState.Modified;
                     db.SaveChanges();
                     Session["Reserva.Anular"] = "La reserva N." + Reserva.IdReserva + " se ha anulado correctamente.";
@@ -134,15 +136,19 @@ namespace App.Controllers
                 Cliente.Nombre = reserva.Cliente.Nombre;
                 Cliente.ApellidoMaterno = reserva.Cliente.ApellidoMaterno;
                 Cliente.ApellidoPaterno = reserva.Cliente.ApellidoPaterno;
+                Cliente.IdUsuario = User.Identity.GetUserId();
+                Cliente.CreatedAt = DateTime.Now;
 
                 db.Clientes.Add(Cliente);
                 db.SaveChanges();
             }
 
             Reserva Reserva = new Reserva();
-            Reserva.Fecha = DateTime.Now;
+            //Reserva.Fecha = DateTime.Now;
+            Reserva.Fecha = reserva.Fecha;
             Reserva.IdHabitacion = reserva.IdHabitacion;
             Reserva.Dni = reserva.Dni;
+            Reserva.createdAt = DateTime.Noew;
             Reserva.Estado = ReservaEstado.RESERVADO.Value;
             db.Reservas.Add(Reserva);
             db.SaveChanges();

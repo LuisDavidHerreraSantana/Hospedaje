@@ -27,6 +27,8 @@ namespace App.Entity
         [Required(ErrorMessage = "El apellido materno es requerido")]
         public string ApellidoMaterno { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<Reserva> Reservas { get; set; }
 
