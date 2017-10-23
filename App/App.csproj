@@ -215,10 +215,6 @@
     <Compile Include="Migrations\201710200232201_add_estado_reserva.Designer.cs">
       <DependentUpon>201710200232201_add_estado_reserva.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710211520053_add_date_states.cs" />
-    <Compile Include="Migrations\201710211520053_add_date_states.Designer.cs">
-      <DependentUpon>201710211520053_add_date_states.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -371,9 +367,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710200232201_add_estado_reserva.resx">
       <DependentUpon>201710200232201_add_estado_reserva.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710211520053_add_date_states.resx">
-      <DependentUpon>201710211520053_add_date_states.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -112,7 +112,6 @@ namespace App.Controllers
 
                     Reserva.Habitacion.Disponible = true;
                     Reserva.Estado = ReservaEstado.ANULADO.Value;
-                    Reserva.AnulatedAt = DateTime.Now;
                     db.Entry(Reserva).State = EntityState.Modified;
                     db.SaveChanges();
                     Session["Reserva.Anular"] = "La reserva N." + Reserva.IdReserva + " se ha anulado correctamente.";
@@ -148,7 +147,7 @@ namespace App.Controllers
             Reserva.Fecha = reserva.Fecha;
             Reserva.IdHabitacion = reserva.IdHabitacion;
             Reserva.Dni = reserva.Dni;
-            Reserva.createdAt = DateTime.Noew;
+            Reserva.createdAt = DateTime.Now;
             Reserva.Estado = ReservaEstado.RESERVADO.Value;
             db.Reservas.Add(Reserva);
             db.SaveChanges();
