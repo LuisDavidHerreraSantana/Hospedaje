@@ -7,18 +7,18 @@ namespace App.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class add_estado_reserva : IMigrationMetadata
+    public sealed partial class model_refactoring : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(add_estado_reserva));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(model_refactoring));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710200232201_add_estado_reserva"; }
+            get { return "201710232214299_model_refactoring"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

@@ -186,34 +186,15 @@
     <Compile Include="Entity\Habitacion.cs" />
     <Compile Include="Entity\Hospedaje.cs" />
     <Compile Include="Entity\Reserva.cs" />
+    <Compile Include="Entity\ReservaDetalle.cs" />
     <Compile Include="Entity\ReservaEstado.cs" />
     <Compile Include="Entity\TipoHabitacion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710180708114_add-reserva-models.cs" />
-    <Compile Include="Migrations\201710180708114_add-reserva-models.Designer.cs">
-      <DependentUpon>201710180708114_add-reserva-models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710180716339_add-reserva-user.cs" />
-    <Compile Include="Migrations\201710180716339_add-reserva-user.Designer.cs">
-      <DependentUpon>201710180716339_add-reserva-user.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710180809220_add-validation-cliente.cs" />
-    <Compile Include="Migrations\201710180809220_add-validation-cliente.Designer.cs">
-      <DependentUpon>201710180809220_add-validation-cliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710180850289_column-name-hospedaje.cs" />
-    <Compile Include="Migrations\201710180850289_column-name-hospedaje.Designer.cs">
-      <DependentUpon>201710180850289_column-name-hospedaje.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710190050071_add-tipo-habitacion.cs" />
-    <Compile Include="Migrations\201710190050071_add-tipo-habitacion.Designer.cs">
-      <DependentUpon>201710190050071_add-tipo-habitacion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710200232201_add_estado_reserva.cs" />
-    <Compile Include="Migrations\201710200232201_add_estado_reserva.Designer.cs">
-      <DependentUpon>201710200232201_add_estado_reserva.cs</DependentUpon>
+    <Compile Include="Migrations\201710232214299_model_refactoring.cs" />
+    <Compile Include="Migrations\201710232214299_model_refactoring.Designer.cs">
+      <DependentUpon>201710232214299_model_refactoring.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -221,6 +202,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Util\Helper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -350,23 +332,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710180708114_add-reserva-models.resx">
-      <DependentUpon>201710180708114_add-reserva-models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710180716339_add-reserva-user.resx">
-      <DependentUpon>201710180716339_add-reserva-user.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710180809220_add-validation-cliente.resx">
-      <DependentUpon>201710180809220_add-validation-cliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710180850289_column-name-hospedaje.resx">
-      <DependentUpon>201710180850289_column-name-hospedaje.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710190050071_add-tipo-habitacion.resx">
-      <DependentUpon>201710190050071_add-tipo-habitacion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710200232201_add_estado_reserva.resx">
-      <DependentUpon>201710200232201_add_estado_reserva.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710232214299_model_refactoring.resx">
+      <DependentUpon>201710232214299_model_refactoring.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

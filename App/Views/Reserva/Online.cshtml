@@ -56,6 +56,7 @@
                 @Html.ValidationMessageFor(model => model.Cliente.ApellidoMaterno, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*
         @Html.Hidden("IdHabitacion")
         <div class="form-group">
             @Html.LabelFor(model => model.Habitacion.Numero, "N° Habitacion", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -73,6 +74,7 @@
 
             </div>
         </div>
+        *@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })

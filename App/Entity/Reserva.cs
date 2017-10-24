@@ -11,16 +11,12 @@ namespace App.Entity
     public class Reserva
     {
         [Key]
-        public int IdReserva { set; get; }
+        public string IdReserva { set; get; }
 
         [Required(ErrorMessage = "El dni es requerido")]
         public string Dni { set; get; }
 
         public virtual Cliente Cliente { get; set; }
-
-        public int IdHabitacion { set; get; }
-
-        public virtual Habitacion Habitacion { get; set; }
 
         [Required(ErrorMessage = "Ingrese la fecha de reserva")]
         public DateTime Fecha { get; set; }
@@ -28,6 +24,8 @@ namespace App.Entity
         public DateTime createdAt { get; set; }
 
         public string Estado { get; set; }
+
+        public virtual ICollection<ReservaDetalle> Detalles { get; set; }
 
     }
 }

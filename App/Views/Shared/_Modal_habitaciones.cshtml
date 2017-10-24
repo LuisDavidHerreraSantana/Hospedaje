@@ -54,11 +54,11 @@
                                 <td class="col-sm-3">
                                     @if (item.Disponible)
                                     {
-                                        <input type="radio" value="@item.IdHabitacion" data-hab="@item.Numero" name="hab-seleccionada" />
+                                        <input type="checkbox" value="@item.IdHabitacion" data-hab="@item.Numero" name="hab-seleccionada" />
                                     }
                                     else
                                     {
-                                        <input type="radio" value="@item.IdHabitacion" data-hab="@item.Numero" name="hab-seleccionada" disabled />
+                                        <input type="checkbox" value="@item.IdHabitacion" data-hab="@item.Numero" name="hab-seleccionada" disabled />
                                     }
                                 </td>
 
@@ -70,7 +70,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color:black; border-color:black;">Aceptar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="apply-hab"  style="background-color:black; border-color:black;">Aceptar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -80,8 +80,48 @@
 
     (function () {
 
+        $('#apply-hab').click(function () {
+
+            var SELECTED_HAB = [];
+
+            $("input:checkbox[name=hab-seleccionada]:checked").each(function () {
+
+                var idHab = $(this).val();
+                var numHab = $(this).attr('data-hab');
+
+                SELECTED_HAB.push({ id: idHab, num: numHab });
+
+            });
+
+            appendHabs(SELECTED_HAB);
+
+        });
+
+        function appendHabs(SELECTED_HAB) {
+
+            $('#selected-hab').empty();
+
+            $.each(SELECTED_HAB, function () {
+
+                var html = '<span style="margin-right: 5px;">'
+                html += '<button class="btn btn-primary" type="button">';
+                html += '<span class="badge">' + this.num + '</span>';
+                html += '<span style="margin-left:7px;" onclick="$(this).parent().parent().remove();"> X</span>';
+                html += '</button>';
+                html += '<input type="hidden" name="Habitaciones" value="' + this.id + '" />';
+                html += '</span>';
+
+                $('#selected-hab').append(html);
+
+            });
+
+        }
+
+        /*
        $('input[name="hab-seleccionada"]').on('change', function () {
            var numHab = $(this).attr('data-hab');
+
+           console.log(numHab);
 
            if (numHab) {
                $('input#Habitacion_Numero').val(numHab);
@@ -90,7 +130,7 @@
                $('input#Habitacion_Numero').val('');
                $('#IdHabitacion').val('');
            }
-        });
+        });*/
 
     })();
 

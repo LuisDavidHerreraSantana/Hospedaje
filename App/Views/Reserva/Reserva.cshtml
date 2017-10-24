@@ -2,7 +2,7 @@
 
 <div style="text-align:center; margin-bottom:30px; margin-top: -25px;">
     <h1>
-        <span class="label label-default" style="background-color:black;">Registar Reserva</span>
+        <span class="label label-default" style="background-color:black;">Registrar Reserva</span>
     </h1>
 </div>
 
@@ -57,21 +57,48 @@
                 @Html.ValidationMessageFor(model => model.Cliente.ApellidoMaterno, "", new { @class = "text-danger" })
             </div>
         </div>
-        @Html.Hidden("IdHabitacion")
-        <div class="form-group">
-            @Html.LabelFor(model => model.Habitacion.Numero, "N° Habitacion", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="input-group">
-                    @Html.EditorFor(model => model.Habitacion.Numero, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
-                    <span class="input-group-btn" style="width: 27.5%;">
-                        <button type="button" class="btn btn-success" onclick="$('#modal-habitaciones').modal('show');">
-                            Verificar
-                        </button>
-                    </span>
+
+        
+        @*
+            @Html.Hidden("IdHabitacion")
+            <div class="form-group">
+                @Html.LabelFor(model => model.Habitacion.Numero, "N° Habitacion", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.Habitacion.Numero, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                        <span class="input-group-btn" style="width: 27.5%;">
+                            <button type="button" class="btn btn-success" onclick="$('#modal-habitaciones').modal('show');">
+                                Verificar
+                            </button>
+                        </span>
+
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Habitacion.Numero, "", new { @class = "text-danger" })
 
                 </div>
-                @Html.ValidationMessageFor(model => model.Habitacion.Numero, "", new { @class = "text-danger" })
+            </div>
+        *@
 
+        <div class="form-group">
+            <label class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <button style="width: 40%;" type="button" class="btn btn-success" onclick="$('#modal-habitaciones').modal('show');">
+                    Verificar Disponibilidad
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Habitaciones</label>
+            <div class="col-md-10" id="selected-hab">
+
+
+                @if (ViewBag.ErrorHab != null)
+                {
+                    <span class="text-danger">
+                        @ViewBag.ErrorHab
+                    </span>
+                }
             </div>
         </div>
 

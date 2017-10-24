@@ -10,19 +10,13 @@ using App.Entity;
 using App.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNet.Identity;
+using System.Collections.ObjectModel;
 
 namespace App.Controllers
 {
     public class ReservaController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: Reserva
-        public ActionResult Index()
-        {
-            var reservas = db.Reservas.Include(r => r.Cliente).Include(r => r.Habitacion);
-            return View(reservas.ToList());
-        }
 
         [ChildActionOnly]
         public ActionResult Habitaciones()
@@ -50,11 +44,19 @@ namespace App.Controllers
 
         [Authorize(Roles = "Empleado")]
         [HttpPost]
-        public ActionResult Reserva(Reserva reserva)
+        public ActionResult Reserva(Reserva reserva, List<int> Habitaciones)
         {
-            if (ModelState.IsValid)
+            var noHabs = Habitaciones != null ? Habitaciones.Count() < 1 : true;
+
+            if (noHabs)
             {
-                this.ReservarHabitacion(reserva);
+                ViewBag.ErrorHab = "Seleccione al menos una habitación";
+            }
+
+
+            if (ModelState.IsValid && !noHabs)
+            {
+                this.ReservarHabitacion(reserva, Habitaciones);
             }
 
             ViewBag.JsonClientes = JsonConvert.SerializeObject(db.Clientes.ToList(), Formatting.Indented);
@@ -70,11 +72,11 @@ namespace App.Controllers
 
         [Authorize(Roles = "Cliente")]
         [HttpPost]
-        public ActionResult Online(Reserva reserva)
+        public ActionResult Online(Reserva reserva, List<int> Habitaciones)
         {
             if (ModelState.IsValid)
             {
-                this.ReservarHabitacion(reserva);
+                this.ReservarHabitacion(reserva, Habitaciones);
             }
 
             return View();
@@ -110,7 +112,16 @@ namespace App.Controllers
                         throw new Exception();
                     }
 
-                    Reserva.Habitacion.Disponible = true;
+                    //Reserva.Habitacion.Disponible = true;
+
+                    var Detalles = new Collection<ReservaDetalle>();
+                    foreach (var hab in Reserva.Detalles)
+                    {
+                        hab.Habitacion.Disponible = true;
+                        Detalles.Add(hab);
+                    }
+
+                    Reserva.Detalles = Detalles;
                     Reserva.Estado = ReservaEstado.ANULADO.Value;
                     db.Entry(Reserva).State = EntityState.Modified;
                     db.SaveChanges();
@@ -125,7 +136,7 @@ namespace App.Controllers
             return RedirectToAction("Anular");
         }
 
-        protected void ReservarHabitacion(Reserva reserva)
+        protected void ReservarHabitacion(Reserva reserva, List<int> Habitaciones)
         {
             var userDb = db.Clientes.Find(reserva.Dni);
             if (userDb == null)
@@ -145,22 +156,38 @@ namespace App.Controllers
             Reserva Reserva = new Reserva();
             //Reserva.Fecha = DateTime.Now;
             Reserva.Fecha = reserva.Fecha;
-            Reserva.IdHabitacion = reserva.IdHabitacion;
             Reserva.Dni = reserva.Dni;
             Reserva.createdAt = DateTime.Now;
             Reserva.Estado = ReservaEstado.RESERVADO.Value;
+
+            Reserva.Detalles = reserva.Detalles;
+
+            ICollection<ReservaDetalle> ReservaDetalles = new Collection<ReservaDetalle>();
+
+            foreach (var Detalle in Habitaciones)
+            {
+                var ReservaDetalle = new ReservaDetalle();
+                ReservaDetalle.IdHabitacion = Detalle;
+
+                ReservaDetalles.Add(ReservaDetalle);
+
+                Habitacion Habitacion = db.Habitaciones.Find(Detalle);
+                Habitacion.Disponible = false;
+                db.Entry(Habitacion).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+
+            Reserva.Detalles = ReservaDetalles;
+
+            Reserva.IdReserva = Util.Helper.Id(db);
+
             db.Reservas.Add(Reserva);
-            db.SaveChanges();
-
-
-            Habitacion Habitacion = db.Habitaciones.Find(reserva.IdHabitacion);
-            Habitacion.Disponible = false;
-            db.Entry(Habitacion).State = EntityState.Modified;
             db.SaveChanges();
 
             var res = db.Reservas.ToList().LastOrDefault();
 
-            ViewBag.Message = "La reserva se registro correctamente, con el N." + res.IdReserva;
+            ViewBag.Message = "La reserva se registro correctamente, con el Cod. " + res.IdReserva;
             ModelState.Clear();
         }
 
