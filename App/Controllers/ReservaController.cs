@@ -91,29 +91,61 @@ namespace App.Controllers
         }
 
         [Authorize(Roles = "Empleado")]
-        public ActionResult Anular(string criterio = "")
+        public ActionResult Anular()
         {
 
             var Reservas = db.Reservas
-                .Where(x => 
-                x.Dni.Contains(criterio) || 
-                x.Cliente.Nombre.Contains(criterio) || 
-                x.Cliente.ApellidoPaterno.Contains(criterio) ||
-                x.Cliente.ApellidoMaterno.Contains(criterio)
-                ).Where(x => x.Estado == ReservaEstado.RESERVADO.Value).ToList();
+                .Where(x => x.Estado == ReservaEstado.RESERVADO.Value).ToList();
+
+
+            List<Object> Res = new List<Object>();
+
+            foreach (var Reserva in Reservas)
+            {
+                if (Reserva.Estado != ReservaEstado.ANULADO.Value)
+                {
+
+                    var habitaciones = Reserva.Detalles;
+
+                    List<Object> habs = new List<Object>();
+
+                    foreach (var h in habitaciones)
+                    {
+                        if (h.Habitacion.Disponible == false )
+                        {
+                            habs.Add(new  { IdHabitacion = h.Habitacion.IdHabitacion, Numero = h.Habitacion.Numero } );
+                        }
+                    }
+
+                    var obj = new
+                    {
+                        IdReserva = Reserva.IdReserva,
+                        Cliente = Reserva.Cliente,
+                        Fecha = Reserva.Fecha.ToString("yyyy-MM-dd"),
+                        Hora = Reserva.Fecha.ToString("HH:ss"),
+                        Habitaciones = habs
+                    };
+
+                    Res.Add(obj);
+                }
+                
+            }
+
+            ViewBag.JsReservas = JsonConvert.SerializeObject(Res, Formatting.Indented);
 
             return View(Reservas);
         }
 
         [Authorize(Roles = "Empleado")]
-        public ActionResult Apply(string id)
+        public ActionResult Apply(string IdReserva, List<int> IdHabitacion)
         {
-            if (id != null)
+            
+            if (IdReserva != null && IdHabitacion.Count > 0)
             {
                 try
                 {
-                    int idReserva = int.Parse(id);
-                    var Reserva = db.Reservas.Find(idReserva);
+                    //int idReserva = int.Parse(id);
+                    var Reserva = db.Reservas.Find(IdReserva);
 
                     if (Reserva == null)
                     {
@@ -122,18 +154,46 @@ namespace App.Controllers
 
                     //Reserva.Habitacion.Disponible = true;
 
-                    var Detalles = new Collection<ReservaDetalle>();
-                    foreach (var hab in Reserva.Detalles)
+                    //var Detalles = new Collection<ReservaDetalle>();
+
+                    var last = 0;
+                    var now = 0;
+
+                    foreach (var Det in Reserva.Detalles)
                     {
-                        hab.Habitacion.Disponible = true;
-                        Detalles.Add(hab);
+                        var Hab = Det.Habitacion;
+                        if (Hab.Disponible)
+                        {
+
+                            last++;
+                            continue;
+                        }
+                            
+                        foreach (var IdHab in IdHabitacion)
+                        {
+                            if (Hab.IdHabitacion == IdHab)
+                            {
+                                Hab.Disponible = true;
+                                db.Entry(Hab).State = EntityState.Modified;
+                                db.SaveChanges();
+                                now++;
+                            }
+
+                        }
                     }
 
-                    Reserva.Detalles = Detalles;
-                    Reserva.Estado = ReservaEstado.ANULADO.Value;
-                    db.Entry(Reserva).State = EntityState.Modified;
-                    db.SaveChanges();
-                    Session["Reserva.Anular"] = "La reserva N." + Reserva.IdReserva + " se ha anulado correctamente.";
+                    if ( (last+now) == Reserva.Detalles.Count)
+                    {
+                        Reserva.Estado = ReservaEstado.ANULADO.Value;
+                        db.Entry(Reserva).State = EntityState.Modified;
+                        db.SaveChanges();
+                        Session["Reserva.Anular"] = "La reserva con el Cod. " + Reserva.IdReserva + " se ha anulado correctamente.";
+                    }
+                    else
+                    {
+                        Session["Reserva.Anular"] = "La reserva con el Cod. " + Reserva.IdReserva + " todavia tiene Habitaciones reservadas";
+                    }
+                    
                 }
                 catch (Exception e) {
                     Session["Reserva.Anular"] = "Ocurrio un error al anular la reserva, por favor intentelo denuevo.";

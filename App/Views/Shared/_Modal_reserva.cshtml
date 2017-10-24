@@ -1,0 +1,149 @@
+﻿<div class="modal fade" id="modal-reservas" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog" role="document" style="width: 800px !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div style="text-align:center; margin-bottom:20px;">
+                    <h1>
+                        <span class="label label-default" style="background-color:black;">Verificar Reserva</span>
+                    </h1>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">DNI: </label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="criterio_busq_reserva" id="criterio_busq_reserva">
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-fixed">
+                    <thead class="th-bg-black">
+                        <tr>
+                            <th class="col-sm-2">
+                                COD.
+                            </th>
+                            <th class="col-sm-2">
+                                DNI
+                            </th>
+                            <th class="col-sm-3">
+                                Cliente
+                            </th>
+                            <th class="col-sm-3">
+                                Fecha de Reserva
+                            </th>
+                            <th class="col-sm-2">
+                                Hora de Ingreso
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody class="table-reservas">
+                        <tr class="row row-table">
+                            <td class="col-sm-3">
+                            </td>
+                            <td class="col-sm-3">
+                            </td>
+                            <td class="col-sm-3">
+                            </td>
+                            <td class="col-sm-3">
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="apply-hab" style="background-color:black; border-color:black;">Aceptar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+
+    (function () {
+
+        (function () {
+
+            $.searchReservas = function () {
+                $('#modal-reservas').modal('show');
+            }
+
+            /*************************************************************************/
+            showReservas(RESERVAS);
+            function showReservas(list) {
+                $('.table-reservas').empty();
+                $.each(list, function () {
+
+                    $('.table-reservas')
+                        .append(
+                            '<tr class="row row-table" onclick=$.seleccionaReserva("' + this.IdReserva + '")>' +
+                                '<td class="col-sm-2">' + this.IdReserva + '</td>' +
+                                '<td class="col-sm-2">' + this.Cliente.Dni + '</td>' +
+                                '<td class="col-sm-3">' + this.Cliente.Nombre +" " + this.Cliente.ApellidoPaterno + " " + this.Cliente.ApellidoMaterno + '</td>' +
+                                '<td class="col-sm-3">' + this.Fecha + '</td>' +
+                                '<td class="col-sm-2">' + this.Hora + '</td>' +
+                            '</tr>'
+                        );
+                });
+            }
+
+            $('#criterio_busq_reserva').keyup(function () {
+
+                var request = $(this).val();
+
+                var resTemp = [];
+
+                $(RESERVAS).each(function () {
+                    var sD = "" + this.Dni;
+                    if (this.Cliente.Dni.includes(request) ||
+                        this.Cliente.Nombre.includes(request) ||
+                        this.Cliente.ApellidoPaterno.includes(request) ||
+                        this.Cliente.ApellidoMaterno.includes(request)) {
+
+                        resTemp.push(this);
+                    }
+                });
+
+                showReservas(resTemp);
+
+            });
+
+            $.seleccionaReserva = function (e) {
+
+                var c = _.find(RESERVAS, function (i) { return i.IdReserva == e; });
+
+                $('.table-anular').empty();
+
+                $.each(c.Habitaciones, function () {
+
+                    $('.table-anular')
+                        .append(
+                            '<tr class="row row-table">' +
+                                '<td style="width: 15%;">' + c.IdReserva + '</td>' +
+                                '<td style="width: 25%;">' + c.Cliente.Nombre + " " + c.Cliente.ApellidoPaterno + " " + c.Cliente.ApellidoMaterno + '</td>' +
+                                '<td style="width: 25%;">' + c.Fecha + '</td>' +
+                                '<td style="width: 15%;">' + c.Hora + '</td>' +
+                                '<td style="width: 10%;">' + this.Numero + '</td>' +
+                                '<td style="width: 10%;"><input type="checkbox" value="' + this.IdHabitacion + '" name="IdHabitacion" /></td>' +
+                            '</tr>'
+                        );
+                });
+
+                $('#IdReserva').val(c.IdReserva);
+
+                $('#modal-reservas').modal('hide');
+            }
+
+        })();
+
+    })();
+
+</script>
+
