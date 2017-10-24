@@ -74,7 +74,15 @@ namespace App.Controllers
         [HttpPost]
         public ActionResult Online(Reserva reserva, List<int> Habitaciones)
         {
-            if (ModelState.IsValid)
+            var noHabs = Habitaciones != null ? Habitaciones.Count() < 1 : true;
+
+            if (noHabs)
+            {
+                ViewBag.ErrorHab = "Seleccione al menos una habitación";
+            }
+
+
+            if (ModelState.IsValid && !noHabs)
             {
                 this.ReservarHabitacion(reserva, Habitaciones);
             }
